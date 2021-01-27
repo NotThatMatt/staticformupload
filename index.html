@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Translate App</title>
+
+    <link href="#" rel="shortcut icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
+        crossorigin="anonymous"></script>
+    <script src="scripts.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Translate and Subtitle Video</h1>
+            <p>Submit an mp4 file and translate it from English to Spanish, French or German and add translated
+                subtitles</p>
+        </div>
+
+        <form action="https://s3uploader-s3uploadbucket-t3ty3xco8132.s3.amazonaws.com/" method="post"
+            enctype="multipart/form-data" id="uploadForm" name="uploadForm">
+            <input type="hidden" id="key" name="key" />
+            <input type="hidden" id="AWSAccessKeyId" name="AWSAccessKeyId" />
+            <input type="hidden" id="x-amz-security-token" name="x-amz-security-token" />
+            <input type="hidden" id="policy" name="policy" />
+            <input type="hidden" id="signature" name="signature" />
+            <!-- File:
+        <input type="file" id="file" name="file" onchange="getFileName(this)" /> <br /> -->
+
+            <div class="input-group mb-3">
+                <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="file" name="file" onchange="getFileName(this)">
+                    <label class="custom-file-label" id="custom-file-label" name="custom-file-label" for="file">Choose
+                        file</label>
+                </div>
+                <!-- <div class="input-group-append">
+              <span class="input-group-text" id="inputGroupFileAddon02" onclick="uploadFile(fileUploaded)">Upload</span>
+            </div> -->
+            </div>
+
+
+        </form>
+        <form id="jobParams" name="jobParams">
+            <select class="form-control" name="source" id="source">
+                <option>Select the source language of the video file</option>
+                <option value="en">English</option>
+            </select>
+            <small id="sourceHelpBlock" class="form-text text-muted">
+                Currently only English is supported as a source language.
+            </small>
+            <p></p>
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Select Target Languages and Voice</h5>
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">Spanish</h6>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="spanishOptions" id="spanish1"
+                                    value="es|es-US|Miguel">
+                                <label class="form-check-label" for="spanish1">US Spanish - Miguel</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="spanishOptions" id="spanish2"
+                                    value="es|es-ES|Lucia">
+                                <label class="form-check-label" for="spanish2">Castilian Spanish - Lucia</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="spanishOptions" id="spanish3"
+                                    value="es|es-MX|Mia">
+                                <label class="form-check-label" for="spanish2">Mexican Spanish - Mia</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">French</h6>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="frenchOptions" id="french1"
+                                    value="fr|fr-CA|Chantal">
+                                <label class="form-check-label" for="french1">Canadian French - Chantal</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="frenchOptions" id="french2"
+                                    value="fr|fr-FR|Celine">
+                                <label class="form-check-label" for="french2">French - Celine</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-subtitle mb-2 text-muted">German</h6>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="germanOptions" id="german1"
+                                    value="de|de-DE|Marlene">
+                                <label class="form-check-label" for="german1">German - Marlene</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="germanOptions" id="german2"
+                                    value="de|de-DE|Hans">
+                                <label class="form-check-label" for="german2">German - Hans</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <br>
+        <input type="button" class="btn btn-primary" name="btnSubmit" id="btnSubmit" value="Submit Job"
+            onclick="submitForm(submitJob)" />
+        <input type="button" class="btn btn-danger" name="btntest" id="btntest" value="test"
+            onclick="testChecked()" />
+
+    </div>
+</body>
+
+</html>

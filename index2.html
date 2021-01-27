@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <!-- Copy the 'url' value returned by S3Client.generate_presigned_post() -->
+    <form action="https://s3uploader-s3uploadbucket-t3ty3xco8132.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
+      <!-- Copy the 'fields' key:values returned by S3Client.generate_presigned_post() -->
+      key: <input type="text" name="key" />
+      <br>
+      AWSAccessKeyId: <input type="text" name="AWSAccessKeyId" />
+      <br>
+      x-amz-security-token: <textarea id="x-amz-security-token" name="x-amz-security-token" rows="4" cols="50"></textarea>      
+      <br>
+      policy: <textarea id="policy" name="policy" rows="4" cols="50"></textarea>      
+      <br>
+      signature: <input type="text" name="signature" />
+    File:
+      <input type="file"   name="file" /> <br />
+      <input type="submit" name="submit" value="Upload to Amazon S3" />
+    </form>
+  </body>
+</html>
