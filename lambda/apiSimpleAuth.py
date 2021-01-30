@@ -12,5 +12,5 @@ def lambda_handler(event, context):
             "isAuthorized": False
             }
     
-    return response;
+    return response
     
