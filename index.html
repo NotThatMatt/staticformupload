@@ -27,31 +27,26 @@
                 subtitles</p>
         </div>
 
-        <form action="https://s3uploader-s3uploadbucket-t3ty3xco8132.s3.amazonaws.com/" method="post"
+        <form action="https://s3BucketName" method="post"
             enctype="multipart/form-data" id="uploadForm" name="uploadForm">
             <input type="hidden" id="key" name="key" />
             <input type="hidden" id="AWSAccessKeyId" name="AWSAccessKeyId" />
             <input type="hidden" id="x-amz-security-token" name="x-amz-security-token" />
             <input type="hidden" id="policy" name="policy" />
             <input type="hidden" id="signature" name="signature" />
-            <!-- File:
-        <input type="file" id="file" name="file" onchange="getFileName(this)" /> <br /> -->
 
             <div class="input-group mb-3">
                 <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="file" name="file" onchange="getFileName(this)">
+                    <input type="file" class="custom-file-input" id="file" name="file" accept=".mp4" onchange="getFileName(this)" required>
                     <label class="custom-file-label" id="custom-file-label" name="custom-file-label" for="file">Choose
                         file</label>
                 </div>
-                <!-- <div class="input-group-append">
-              <span class="input-group-text" id="inputGroupFileAddon02" onclick="uploadFile(fileUploaded)">Upload</span>
-            </div> -->
             </div>
 
 
         </form>
         <form id="jobParams" name="jobParams">
-            <select class="form-control" name="source" id="source">
+            <select class="form-control" name="source" id="source" required>
                 <option>Select the source language of the video file</option>
                 <option value="en">English</option>
             </select>
@@ -119,8 +114,7 @@
         <br>
         <input type="button" class="btn btn-primary" name="btnSubmit" id="btnSubmit" value="Submit Job"
             onclick="submitForm(submitJob)" />
-        <input type="button" class="btn btn-danger" name="btntest" id="btntest" value="test"
-            onclick="testChecked()" />
+
 
     </div>
 </body>
