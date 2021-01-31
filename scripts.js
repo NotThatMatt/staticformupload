@@ -43,24 +43,41 @@ function submitForm(callback) {
 }
 
 function submitJob(filename){
-  console.log("submitJob reached")
   var targets = document.getElementsByClassName('form-check-input')
   var filename = document.getElementById('custom-file-label').innerHTML
   var jobForm=document.getElementById("jobParams")
 
   var json = {
-    "input": 
+    "Inputs": 
     {
         "inputMediaBucket": "subtitle-and-translate-media",
         "inputMediaKey": "input-media/"+filename,
         "mediaFile": filename,
         "mediaFormat": "mp4",
-        "sourceLang": "us-en"
+        "sourceLanguageShort": "en",
+        "sourceLanguageFull": "en-US"
     },
-    "targets":
+    "Targets":
             [
       ]
 }
+
+    var sourceSubtitle = {
+      "translate": {
+        "translate": "n",
+        "targetLanguageShort": "en",
+        "targetLanguageFull": "en-US"
+      },
+      "subtitle": {
+        "createSubtitle": "y",
+        "subtitleType": "srt"
+      },
+      "polly:": {
+        "createAudio": "n"
+      }
+    }
+    
+    json.Targets.push(sourceSubtitle)
 
     for (var i=0; i<targets.length; i++)  {
       if (targets[i].checked){
@@ -69,8 +86,8 @@ function submitJob(filename){
         target = {
           "translate": {
               "translate": "y",
-              "targetLangShort": lang[0],
-             "targetLangFull": lang[1],
+              "targetLanguageShort": lang[0],
+             "targetLanguageFull": lang[1],
           },
           "subtitle": {
               "createSubtitle": "y",
@@ -81,15 +98,15 @@ function submitJob(filename){
               "voiceId": lang[2],
           }
       }
-      json.targets.push(target)
+      json.Targets.push(target)
     }
     }
 
   var request = new XMLHttpRequest();
-  request.open("POST", "https://tw3tm6kx97.execute-api.us-east-1.amazonaws.com/job");
+  request.open("POST", "https://5u9ddnz7v5.execute-api.us-east-1.amazonaws.com/job");
   
   request.setRequestHeader("Accept", "*/*");
-  request.setRequestHeader("Authorization", "true");
+  request.setRequestHeader("authorization", "superSecret");
   request.setRequestHeader("Access-Control-Allow-Origin", "*");
   request.setRequestHeader('Content-Type', 'application/json');
   
@@ -98,6 +115,7 @@ function submitJob(filename){
   request.onload = function () {
     var data = JSON.parse(this.response);
     if (request.status >= 200 && request.status < 400) {
+      console.log("api called")
       console.log(data);
     } else {
       console.log("error");
