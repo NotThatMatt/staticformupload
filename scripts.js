@@ -2,9 +2,9 @@ function getUrl(fileName, callback) {
   var request = new XMLHttpRequest();
   var params = "filename=" + fileName;
 
-  request.open("POST", "https://tw3tm6kx97.execute-api.us-east-1.amazonaws.com/test1?" + params);
+  request.open("GET", "https://5u9ddnz7v5.execute-api.us-east-1.amazonaws.com/upload?" + params);
   request.setRequestHeader("Accept", "*/*");
-  request.setRequestHeader("Authorization", "true");
+  request.setRequestHeader("authorization", "superSecret");
   request.setRequestHeader("Access-Control-Allow-Origin", "*");
 
   request.send();
@@ -13,6 +13,7 @@ function getUrl(fileName, callback) {
     var data = JSON.parse(this.response);
     if (request.status >= 200 && request.status < 400) {
       callback(data);
+      console.log(data)
     } else {
       console.log("error");
     }

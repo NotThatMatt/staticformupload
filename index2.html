@@ -5,15 +5,15 @@
   </head>
   <body>
     <!-- Copy the 'url' value returned by S3Client.generate_presigned_post() -->
-    <form action="https://s3uploader-s3uploadbucket-t3ty3xco8132.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
+    <form action="https://mj-test-bucket-143744710321.s3.amazonaws.com/" method="post" enctype="multipart/form-data">
       <!-- Copy the 'fields' key:values returned by S3Client.generate_presigned_post() -->
       key: <input type="text" name="key" />
       <br>
       AWSAccessKeyId: <input type="text" name="AWSAccessKeyId" />
       <br>
-      x-amz-security-token: <textarea id="x-amz-security-token" name="x-amz-security-token" rows="4" cols="50"></textarea>      
+      x-amz-security-token: <input type="text" id="x-amz-security-token" name="x-amz-security-token" />     
       <br>
-      policy: <textarea id="policy" name="policy" rows="4" cols="50"></textarea>      
+      policy: <input type="text"  id="policy" name="policy" />
       <br>
       signature: <input type="text" name="signature" />
     File:

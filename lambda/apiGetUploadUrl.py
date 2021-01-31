@@ -4,7 +4,7 @@ from botocore.exceptions import ClientError
 
 def lambda_handler(event, context):
     
-    bucket_name=event["queryStringParameters"]['bucketname']
+    bucket_name="translate-frontend-website-143744710321"
     object_name=event["queryStringParameters"]['filename']
     fields=None
     conditions=None
