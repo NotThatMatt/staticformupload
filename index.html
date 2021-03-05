@@ -16,10 +16,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
         crossorigin="anonymous"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.856.0.min.js"></script>
     <script src="scripts.js"></script>
 </head>
 
-<body>
+<body onload="getJobList()";>
     <div class="container">
         <div class="jumbotron">
             <h1>Translate and Subtitle Video</h1>
@@ -27,7 +28,7 @@
                 subtitles</p>
         </div>
 
-        <form action="https://subtitle-and-translate-media.s3.amazonaws.com/" method="post"
+        <form method="post"
             enctype="multipart/form-data" id="uploadForm" name="uploadForm">
             <input type="hidden" id="key" name="key" />
             <input type="hidden" id="AWSAccessKeyId" name="AWSAccessKeyId" />
@@ -114,9 +115,26 @@
         <br>
         <input type="button" class="btn btn-primary" name="btnSubmit" id="btnSubmit" value="Submit Job"
             onclick="submitForm(submitJob)" />
-
-
     </div>
+    <div class="container">
+        <hr/>
+    </div>
+    <div class="container">
+        <div class="row">
+        <div class="col" >
+            <h2>Video Translation Jobs</h2>
+        </div>
+        <div class="col">
+            <div class="float-right">
+                <input type="button" class="btn btn-info" name="btnRefresh" id="btnRefresh" value="Refresh Job List"
+                onclick="getJobList()" />
+            </div>
+          </div>
+    </div>
+        </div>
+        
+    <div class="container" id="jobList"></div>
+
 </body>
 
 </html>
